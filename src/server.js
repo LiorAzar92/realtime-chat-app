@@ -10,6 +10,8 @@ import connectDB from "./db/connect.js";
 
 // routes
 import authRoutes from './routes/authRoutes.js';
+import conversationRoutes from './routes/conversationRoutes.js'
+import messageRoutes from './routes/messageRoutes.js'
 
 // middlewares
 import errorHandler from "./middlewares/errorHandler.js";
@@ -30,6 +32,8 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 app.use('/api/auth', authRoutes);
+app.use('/api/conversation', conversationRoutes);
+app.use('/api/message', messageRoutes);
 
 app.get('/', (req, res) => {
     res.send('Server is up!')
