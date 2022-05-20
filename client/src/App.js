@@ -1,14 +1,12 @@
 import { View, Text, Image, ScrollView, TextInput } from 'react-native';
 import './App.css';
-import AuthProvider from './components/AuthProvider';
+import AppProvider from './components/AppProvider';
 
 function App() {
   return (
-    <div>
-      <AuthProvider>
-
-      </AuthProvider>
-    </div>
+    <AppProvider>
+      <h1>Hi!</h1>
+    </AppProvider>
   );
 }
 
