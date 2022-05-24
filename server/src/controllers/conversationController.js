@@ -14,7 +14,7 @@ const createConversation = async (req, res) => {
 
 const getConvByUser = async (req, res) => {
     const conversations = await Conversation.find({
-        memebers: { $in: [req.params.userId] }
+        members: { $in: req.params.userId }
     })
     res
         .status(StatusCodes.OK)

@@ -20,7 +20,10 @@ const SideBar = () => {
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="me-auto">
                         <Nav.Link to='/' as={NavLink}>Home</Nav.Link>
-                        <Nav.Link to='/chats' as={NavLink}>Chats</Nav.Link>
+                        {
+                            isAuth &&
+                            <Nav.Link to='/chats' as={NavLink}>Chats</Nav.Link>
+                        }
                     </Nav>
                     {
                         isAuth &&

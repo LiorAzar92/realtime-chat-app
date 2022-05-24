@@ -33,4 +33,12 @@ const logout = async (req, res) => {
         .send('User Logged out!')
 }
 
-export default { register, login, logout };
+const getUserById = async (req, res) => {
+    const { id: userId } = req.params;
+    const user = await User.findOne({ _id: userId });
+    res
+        .status(StatusCodes.OK)
+        .json({ user });
+}
+
+export default { register, login, logout, getUserById };

@@ -12,6 +12,7 @@ const AppProvider = ({ children }) => {
     const [activeUser, setActiveUser] = useState(null);
     const [closeModal, setCloseModal] = useState(true);
     const [conversations, setConversations] = useState([]);
+    const [currentChat, setCurrentChat] = useState(null);
 
     const authFetch = axios.create({
         baseURL:
@@ -124,6 +125,27 @@ const AppProvider = ({ children }) => {
         }
     }
 
+    const getMessagesById = async (conversationId, setFunction) => {
+        const url = `/message/${conversationId}`
+        try {
+            const res = await authFetch.get(url);
+            setFunction(res.data);
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
+    const getFriendById = async (userId, setFunction) => {
+        const url = `/auth/user/${userId}`;
+        try {
+            const { data } = await authFetch.get(url);
+            const { user } = data;
+            setFunction(user);
+        } catch (error) {
+            console.log(error.response);
+        }
+    }
+
     return (
         <AppContext.Provider
             value={{
@@ -143,7 +165,11 @@ const AppProvider = ({ children }) => {
                 logoutUser,
                 closeModal,
                 conversations,
-                getConvByUser
+                getConvByUser,
+                getFriendById,
+                setCurrentChat,
+                currentChat,
+                getMessagesById
             }}>
             {
                 isLoading &&

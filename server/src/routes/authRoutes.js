@@ -13,5 +13,8 @@ router
 router
     .route('/logout')
     .get(authController.logout)
+router
+    .route('/user/:id')
+    .get(authController.getUserById)
 
 export default router;
