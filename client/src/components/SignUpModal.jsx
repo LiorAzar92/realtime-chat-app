@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Form, Modal, Button, Row, Col, Alert } from 'react-bootstrap'
 import useAuth from '../hooks/useAuth';
 
@@ -96,7 +96,7 @@ const SignUpModal = ({ show, handleClose }) => {
                             </Alert>
                         }
                         <div className='text-center'>
-                            <Button variant="outline-info" type="submit" className='mb-2 ' disabled={showAlert}>
+                            <Button variant="outline-dark" type="submit" className='mb-2 ' disabled={showAlert}>
                                 {!showAlert && alertText === 'success' ? 'Loading..' : 'Sign Up'}
                             </Button>
                         </div>

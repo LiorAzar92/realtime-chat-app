@@ -10,6 +10,8 @@ const AppProvider = ({ children }) => {
     const [alertText, setAlertText] = useState('');
     const [alertType, setAlertType] = useState('');
     const [activeUser, setActiveUser] = useState(null);
+    const [closeModal, setCloseModal] = useState(true);
+    const [conversations, setConversations] = useState([]);
 
     const authFetch = axios.create({
         baseURL:
@@ -45,6 +47,9 @@ const AppProvider = ({ children }) => {
         try {
             await authFetch.post(url, recievedUser);
             displayAlert('User created! redirecting...', 'success');
+            setTimeout(() => {
+                setCloseModal(!closeModal);
+            }, 2500);
         } catch (error) {
             console.log(error.response.data.msg);
             displayAlert(error.response.data.msg, 'danger')
@@ -60,6 +65,7 @@ const AppProvider = ({ children }) => {
             setActiveUser(user);
             setTimeout(() => {
                 setIsAuth(!isAuth);
+                setCloseModal(!closeModal);
             }, 2500);
             addUserToLocalStorage({ user });
         } catch (error) {
@@ -107,6 +113,17 @@ const AppProvider = ({ children }) => {
         localforage.removeItem('user');
     }
 
+    const getConvByUser = async (userId) => {
+        const url = `/conversation/${userId}`
+        try {
+            const { data } = await authFetch.get(url);
+            console.log(data)
+            setConversations(data)
+        } catch (error) {
+            console.log(error.response.data.msg);
+        }
+    }
+
     return (
         <AppContext.Provider
             value={{
@@ -123,7 +140,10 @@ const AppProvider = ({ children }) => {
                 loginUser,
                 updateUser,
                 activeUser,
-                logoutUser
+                logoutUser,
+                closeModal,
+                conversations,
+                getConvByUser
             }}>
             {
                 isLoading &&

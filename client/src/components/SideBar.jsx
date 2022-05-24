@@ -1,7 +1,17 @@
-import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap'
-import { NavLink } from 'react-router-dom'
+import { Navbar, Nav, Container } from 'react-bootstrap'
+import { NavLink, useNavigate } from 'react-router-dom'
+import useAuth from '../hooks/useAuth'
 
 const SideBar = () => {
+    const { isAuth, logoutUser } = useAuth();
+
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        logoutUser();
+        navigate('/')
+    }
+
     return (
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
             <Container>
@@ -12,15 +22,12 @@ const SideBar = () => {
                         <Nav.Link to='/' as={NavLink}>Home</Nav.Link>
                         <Nav.Link to='/chats' as={NavLink}>Chats</Nav.Link>
                     </Nav>
-                    <Nav>
-                        <NavDropdown title="User" id="collasible-nav-dropdown">
-                            <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-                            <NavDropdown.Divider />
-                            <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
-                        </NavDropdown>
-                    </Nav>
+                    {
+                        isAuth &&
+                        <Nav>
+                            <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
+                        </Nav>
+                    }
                 </Navbar.Collapse>
             </Container>
         </Navbar>
