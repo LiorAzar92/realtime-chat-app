@@ -10,7 +10,7 @@ const SideBar = () => {
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="me-auto">
                         <Nav.Link to='/' as={NavLink}>Home</Nav.Link>
-                        <Nav.Link href="#pricing">Pricing</Nav.Link>
+                        <Nav.Link to='/chats' as={NavLink}>Chats</Nav.Link>
                     </Nav>
                     <Nav>
                         <NavDropdown title="User" id="collasible-nav-dropdown">

@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import AppContext from "../src/contexts/AuthContext";
+import AppContext from "../contexts/AppContext";
 
 export default function useAuth() {
     return useContext(AppContext);
